@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:killer_wallpaper/views/home.dart';
+import 'package:killer_wallpaper/widget/widget.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -22,7 +24,9 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   route(){
-
+    Navigator.push(context, MaterialPageRoute(
+      builder: (context) => Home()
+    ));
   }
 
   @override
@@ -36,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Image.asset("assets/images/k.png"),
             ),
             Text(
-              "Killer Wallpaper 4HD",
+              "$brandName",
               style: TextStyle(
                 fontSize: 25,
                 color: Color(0xff00c2cb)

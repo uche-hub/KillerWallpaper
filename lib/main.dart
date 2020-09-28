@@ -12,6 +12,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Killer Wallpaper',
+      theme: ThemeData(
+        primaryColor: Colors.white
+      ),
       home: SplashScreen(),
     );
   }
