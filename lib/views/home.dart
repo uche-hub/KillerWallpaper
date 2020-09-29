@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:killer_wallpaper/data/data.dart';
 import 'package:killer_wallpaper/model/categories_model.dart';
 import 'package:killer_wallpaper/model/wallpaper_model.dart';
+import 'package:killer_wallpaper/views/category.dart';
+import 'package:killer_wallpaper/views/search.dart';
 import 'package:killer_wallpaper/widget/widget.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,6 +19,8 @@ class _HomeState extends State<Home> {
 
   List<CategoriesModel> categories = new List();
   List<WallpaperModel> wallpapers = new List();
+
+  TextEditingController searchController = new TextEditingController();
 
   getTrendingWallpaper() async{
     var response = await http.get("https://api.pexels.com/v1/curated?per_page=5000&page=1",
@@ -58,7 +62,7 @@ class _HomeState extends State<Home> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: Color(0xfff5f8fd),
+                  color: Colors.black12,
                   borderRadius: BorderRadius.circular(30)
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 24),
@@ -67,13 +71,24 @@ class _HomeState extends State<Home> {
                   children: [
                     Expanded(
                       child: TextField(
+                        controller: searchController,
                         decoration: InputDecoration(
                             hintText: "Search Wallpaper",
                           border: InputBorder.none
                         ),
                       ),
                     ),
-                    Icon(Icons.search)
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => Search(
+                            searchQuery: searchController.text,
+                          )
+                        ));
+                      },
+                      child: Container(
+                          child: Icon(Icons.search)),
+                    )
                   ],
                 ),
               ),
@@ -108,30 +123,39 @@ class CategoriesTile extends StatelessWidget {
   CategoriesTile({@required this.title, @required this.imgUrl});
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 4),
-      child: Stack(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-              child: Image.network(imgUrl, height: 60, width: 100, fit: BoxFit.cover,)),
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              color: Colors.black26,
-            ),
-            alignment: Alignment.center,
-            height: 60, width: 100,
-            child: Text(
-              title,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w500
-              ),
-            ),
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(
+          builder: (context) => Categories(
+            categoryName: title.toLowerCase(),
           )
-        ],
+        ));
+      },
+      child: Container(
+        margin: EdgeInsets.only(right: 4),
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+                child: Image.network(imgUrl, height: 60, width: 100, fit: BoxFit.cover,)),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                color: Colors.black26,
+              ),
+              alignment: Alignment.center,
+              height: 60, width: 100,
+              child: Text(
+                title,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

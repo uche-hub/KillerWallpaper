@@ -3,19 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:killer_wallpaper/model/wallpaper_model.dart';
 
 Widget brandName(){
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Text(
-        "Killer Wallpaper"
-      ),
-      Text(
-        "4HD",
-        style: TextStyle(
-            color: Color(0xff00c2cb)
-        ),
-      )
-    ],
+  return RichText(
+    text: TextSpan(
+      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+      children: <TextSpan>[
+        TextSpan(text: 'Killer Wallpaper', style: TextStyle(color: Color(0xff000000))),
+        TextSpan(text: '4HD', style: TextStyle(color: Color(0xff00c2cb))),
+      ],
+    ),
   );
 }
 
