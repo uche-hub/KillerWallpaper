@@ -21,21 +21,25 @@ class _SearchState extends State<Search> {
   TextEditingController searchController = new TextEditingController();
 
   getSearchWallpaper(String query) async{
-    var response = await http.get("https://api.pexels.com/v1/search?query=$query&per_page=500&page=1",
+    await http.get("https://api.pexels.com/v1/search?query=$query&per_page=50&page=1",
         headers: {
-          "Authorization" : apiKey});
+          "Authorization" : apiKey}).then((value) {
 
-    // print(response.body.toString());
+      // print(response.body.toString());
 
-    Map<String, dynamic> jsonData = jsonDecode(response.body);
-    jsonData["photos"].forEach((element){
-      //print(element);
-      WallpaperModel wallpaperModel = new WallpaperModel();
-      wallpaperModel = WallpaperModel.fromMap(element);
-      wallpapers.add(wallpaperModel);
+      Map<String, dynamic> jsonData = jsonDecode(value.body);
+      jsonData["photos"].forEach((element){
+        //print(element);
+        WallpaperModel wallpaperModel = new WallpaperModel();
+        wallpaperModel = WallpaperModel.fromMap(element);
+        wallpapers.add(wallpaperModel);
+      });
+
+      setState(() {});
+
     });
 
-    setState(() {});
+
   }
 
   @override

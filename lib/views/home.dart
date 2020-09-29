@@ -6,6 +6,7 @@ import 'package:killer_wallpaper/data/data.dart';
 import 'package:killer_wallpaper/model/categories_model.dart';
 import 'package:killer_wallpaper/model/wallpaper_model.dart';
 import 'package:killer_wallpaper/views/category.dart';
+import 'package:killer_wallpaper/views/image_view.dart';
 import 'package:killer_wallpaper/views/search.dart';
 import 'package:killer_wallpaper/widget/widget.dart';
 import 'package:http/http.dart' as http;
@@ -23,7 +24,7 @@ class _HomeState extends State<Home> {
   TextEditingController searchController = new TextEditingController();
 
   getTrendingWallpaper() async{
-    var response = await http.get("https://api.pexels.com/v1/curated?per_page=5000&page=1",
+    var response = await http.get("https://api.pexels.com/v1/curated?per_page=50&page=1",
       headers: {
         "Authorization" : apiKey});
 

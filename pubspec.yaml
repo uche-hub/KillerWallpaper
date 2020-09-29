@@ -21,7 +21,13 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  http:
+  http: ^0.12.2
+  image_gallery_saver: ^1.5.0
+  cached_network_image: ^2.3.2+1
+  permission_handler: ^4.2.0+hotfix.3
+  fluttertoast: ^7.1.1
+  random_string: ^2.1.0
+  dio: ^3.0.10
   flutter:
     sdk: flutter
 

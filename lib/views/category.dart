@@ -23,19 +23,20 @@ class _CategoriesState extends State<Categories> {
   getSearchWallpaper(String query) async{
     var response = await http.get("https://api.pexels.com/v1/search?query=$query&per_page=500&page=1",
         headers: {
-          "Authorization" : apiKey});
+          "Authorization" : apiKey}).then((value) {
+      Map<String, dynamic> jsonData = jsonDecode(value.body);
+      jsonData["photos"].forEach((element){
+        //print(element);
+        WallpaperModel wallpaperModel = new WallpaperModel();
+        wallpaperModel = WallpaperModel.fromMap(element);
+        wallpapers.add(wallpaperModel);
+      });
 
-    // print(response.body.toString());
-
-    Map<String, dynamic> jsonData = jsonDecode(response.body);
-    jsonData["photos"].forEach((element){
-      //print(element);
-      WallpaperModel wallpaperModel = new WallpaperModel();
-      wallpaperModel = WallpaperModel.fromMap(element);
-      wallpapers.add(wallpaperModel);
+      setState(() {});
     });
 
-    setState(() {});
+    // print(response.body.toString())
+
   }
 
   @override

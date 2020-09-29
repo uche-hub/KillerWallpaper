@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:killer_wallpaper/model/wallpaper_model.dart';
+import 'package:killer_wallpaper/views/image_view.dart';
 
 Widget brandName(){
   return RichText(
@@ -26,10 +27,22 @@ Widget wallpaperList({List<WallpaperModel> wallpapers, context}){
       crossAxisSpacing: 6.0,
       children: wallpapers.map((wallpaper){
         return GridTile(
-          child: Container(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-                child: Image.network(wallpaper.src.portrait, fit: BoxFit.cover,)),
+          child: GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) => ImageView(
+                  imgUrl: wallpaper.src.portrait,
+                )
+              ));
+            },
+            child: Hero(
+              tag: wallpaper.src.portrait,
+              child: Container(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                    child: Image.network(wallpaper.src.portrait, fit: BoxFit.cover,)),
+              ),
+            ),
           ),
         );
       }).toList(),
