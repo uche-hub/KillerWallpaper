@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
   TextEditingController searchController = new TextEditingController();
 
   getTrendingWallpaper() async{
-    var response = await http.get("https://api.pexels.com/v1/curated?per_page=50&page=1",
+    var response = await http.get("https://api.pexels.com/v1/curated?per_page=30&page=1",
       headers: {
         "Authorization" : apiKey});
 
