@@ -27,6 +27,7 @@ dependencies:
   permission_handler: ^4.2.0+hotfix.3
   fluttertoast: ^7.1.1
   random_string: ^2.1.0
+  firebase_admob: ^0.9.3+4
   dio: ^3.0.10
   flutter:
     sdk: flutter
