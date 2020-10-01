@@ -14,7 +14,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="Killer Wallpaper"
+        android:label="Exotic Wallpaper"
         android:icon="@mipmap/ic_launcher">
 
         <meta-data
